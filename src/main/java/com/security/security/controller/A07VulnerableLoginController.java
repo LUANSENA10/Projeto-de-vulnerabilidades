@@ -1,4 +1,4 @@
-package com.security.security.input.controller;
+package com.security.security.controller;
 
 import com.security.security.core.model.User;
 import com.security.security.entity.LoginRequest;
