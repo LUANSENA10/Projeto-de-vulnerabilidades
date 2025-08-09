@@ -31,12 +31,6 @@ public class SecurityFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
-        String path = request.getRequestURI();
-        if (path.startsWith("/h2-console")) {
-            filterChain.doFilter(request, response);
-            return;
-        }
-
         String bearerToken = getToken(request);
         if (isNotBlank(bearerToken)) {
             PayloadToken payloadToken = authService.validateToken(bearerToken);
