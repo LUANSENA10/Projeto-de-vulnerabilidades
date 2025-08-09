@@ -21,4 +21,10 @@ public class UserService {
         return mapper.map(userEntity, User.class);
     }
 
+    public User findByUsername(String username) {
+        UserEntity userEntity = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UserNotFoundException("User not found"));
+        return mapper.map(userEntity, User.class);
+    }
+
 }
