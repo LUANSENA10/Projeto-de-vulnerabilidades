@@ -30,9 +30,11 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-                .csrf(AbstractHttpConfigurer::disable)
+                .csrf(csrf -> csrf.ignoringRequestMatchers("/h2-console/**"))
+                .headers(headers -> headers.frameOptions(frame -> frame.sameOrigin()))
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(req -> {
+                    req.requestMatchers("/h2-console/**").permitAll();
                     req.requestMatchers(HttpMethod.POST, "/v1/auth/login").permitAll();
                     req.anyRequest().authenticated();
                 })
