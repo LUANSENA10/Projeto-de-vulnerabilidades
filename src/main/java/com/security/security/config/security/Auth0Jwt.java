@@ -33,7 +33,7 @@ public class Auth0Jwt {
             return JWT.create()
                     .withIssuer(SECURITY_API)
                     .withSubject(user.getEmail())
-                    .withClaim("name", user.getName())
+                    .withClaim("username", user.getUsername())
                     .withClaim("email", user.getEmail())
                     .withIssuedAt(issuedAt())
                     .withExpiresAt(expiresAt())
@@ -52,7 +52,7 @@ public class Auth0Jwt {
                     .verify(token)
                     .getClaims();
             return PayloadToken.builder()
-                    .name(claims.get("name").asString())
+                    .username(claims.get("username").asString())
                     .email(claims.get("email").asString())
                     .build();
         } catch (JWTVerificationException e) {

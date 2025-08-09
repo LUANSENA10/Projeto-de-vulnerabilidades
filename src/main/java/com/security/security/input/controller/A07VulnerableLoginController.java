@@ -1,4 +1,4 @@
-package com.security.security.controller;
+package com.security.security.input.controller;
 
 import com.security.security.core.model.User;
 import com.security.security.entity.LoginRequest;
@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
@@ -16,6 +17,7 @@ import java.util.Map;
 // A07 - CÓDIGO VULNERÁVEL
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/v1/login-vulneravel")
 public class A07VulnerableLoginController {
 
     private final UserService userService;

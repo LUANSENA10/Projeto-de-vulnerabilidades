@@ -1,4 +1,4 @@
-package com.security.security.controller;
+package com.security.security.input.controller;
 
 import com.security.security.core.model.User;
 import com.security.security.entity.LoginRequest;
@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
@@ -33,6 +34,7 @@ import java.util.concurrent.ConcurrentHashMap;
         Exemplo: Sistema que permite tentativas ilimitadas de login ou tokens de sessão que não expiram. */
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/v1/login-seguro")
 public class A07SecureLoginController {
 
     private final UserService userService;
