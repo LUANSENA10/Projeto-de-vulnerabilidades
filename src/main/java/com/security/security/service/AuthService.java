@@ -1,7 +1,6 @@
 package com.security.security.service;
 
 import com.security.security.config.security.Auth0Jwt;
-import com.security.security.config.security.model.PayloadToken;
 import com.security.security.core.exceptions.UnauthorizedException;
 import com.security.security.core.model.User;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +15,7 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
     private final UserService userService;
 
-    public PayloadToken validateToken(String bearerToken) {
+    public String validateToken(String bearerToken) {
         return auth0Jwt.validateToken(bearerToken);
     }
 

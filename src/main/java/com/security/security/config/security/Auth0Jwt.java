@@ -6,7 +6,6 @@ import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.Claim;
 import com.security.security.config.properties.TokenProperties;
-import com.security.security.config.security.model.PayloadToken;
 import com.security.security.core.exceptions.InvalidTokenException;
 import com.security.security.core.model.User;
 import lombok.RequiredArgsConstructor;
@@ -44,17 +43,14 @@ public class Auth0Jwt {
         }
     }
 
-    public PayloadToken validateToken(String token) {
+    public String validateToken(String token) {
         try {
             Map<String, Claim> claims = JWT.require(Algorithm.HMAC256(tokenProperties.getSecret()))
                     .withIssuer(SECURITY_API)
                     .build()
                     .verify(token)
                     .getClaims();
-            return PayloadToken.builder()
-                    .username(claims.get("username").asString())
-                    .email(claims.get("email").asString())
-                    .build();
+            return claims.get("email").asString();
         } catch (JWTVerificationException e) {
             throw new InvalidTokenException(e.getMessage());
         }
