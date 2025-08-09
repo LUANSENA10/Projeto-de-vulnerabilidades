@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 
-// A07 - CÓDIGO VULNERÁVEL (Simples)
+// A07 - CÓDIGO VULNERÁVEL
 @RestController
 public class A07VulnerableLoginController {
     

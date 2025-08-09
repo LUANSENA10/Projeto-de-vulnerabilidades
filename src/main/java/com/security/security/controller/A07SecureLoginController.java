@@ -19,7 +19,18 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-// A07 - CÓDIGO SEGURO (Simples)
+// A07 - CÓDIGO SEGURO
+/* A07 — Identification and Authentication Failures
+        Falhas nos processos de identificação e autenticação de usuários:
+
+        Ataques de força bruta não prevenidos
+        Senhas fracas ou padrão permitidas
+        Recuperação de senha insegura
+        IDs de sessão expostos na URL ou transmitidos de forma insegura
+        Tokens de sessão não invalidados após logout
+        Autenticação multifator inadequada ou ausente
+
+        Exemplo: Sistema que permite tentativas ilimitadas de login ou tokens de sessão que não expiram. */
 @RestController
 public class A07SecureLoginController {
     
