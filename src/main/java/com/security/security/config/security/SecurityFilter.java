@@ -9,6 +9,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -16,6 +18,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 import java.util.List;
 
+import static java.text.MessageFormat.format;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 @Component
@@ -33,14 +36,14 @@ public class SecurityFilter extends OncePerRequestFilter {
             String email = authService.validateToken(bearerToken);
             if (isNotBlank(email)) {
                 User user = userService.findByEmail(email);
-                UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(user, null, List.of());
+                UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(user, null, getRoles(user));
                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);
             }
         }
         filterChain.doFilter(request, response);
     }
 
-    private static String getToken(HttpServletRequest request) {
+    private String getToken(HttpServletRequest request) {
         String authorization = request.getHeader(AUTHORIZATION);
         if (isNotBlank(authorization)) {
             authorization = authorization.replace("Bearer ", "");
@@ -48,5 +51,9 @@ public class SecurityFilter extends OncePerRequestFilter {
         }
 
         return null;
+    }
+
+    private List<GrantedAuthority> getRoles(User user) {
+        return List.of(new SimpleGrantedAuthority(format("ROLE_{0}", user.getRole())));
     }
 }
