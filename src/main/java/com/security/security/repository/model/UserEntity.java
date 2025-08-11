@@ -25,4 +25,15 @@ public class UserEntity {
     private String email;
     private String password;
     private String role;
+    private String salt;
+    private String algorithm;
+
+    public UserEntity(String username, String email, String password, String salt, String algorithm) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.salt = salt;
+        this.algorithm = algorithm;
+        this.role = "USER";
+    }
 }
