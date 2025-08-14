@@ -20,5 +20,18 @@ spring:
 server:
   port: 8080
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, metrics, prometheus
+  metrics:
+    enable:
+      jvm: true
+    distribution:
+      slo.http.server.requests: 50ms, 100ms, 200ms, 300ms, 500ms, 1s
+    tags:
+      application: security-api
+
 token:
   secret: 347c2f96-90b2-44d7-acdc-8c42d69b12f4

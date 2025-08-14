@@ -38,6 +38,7 @@ public class SecurityConfig {
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(req -> {
                     req.requestMatchers("/h2-console/**").permitAll();
+                    req.requestMatchers("/actuator/**").permitAll();
                     req.requestMatchers(HttpMethod.POST, "/v1/auth/login").permitAll();
                     req.requestMatchers(HttpMethod.POST, "/v1/users").permitAll();
                     req.requestMatchers(HttpMethod.GET, "/v1/users").hasAnyRole("ADMIN", "USER");
