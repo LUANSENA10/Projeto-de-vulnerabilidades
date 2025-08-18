@@ -23,6 +23,7 @@ server:
 logging:
   level:
     root: INFO
+    com.security.security.service.PaymentService: DEBUG
 
 management:
   endpoints:
