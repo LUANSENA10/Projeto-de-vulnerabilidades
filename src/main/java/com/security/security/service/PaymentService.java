@@ -29,11 +29,11 @@ public class PaymentService {
     public void getPaymentIntent(String event) {
         switch (event) {
             case "payment_intent.succeeded" -> {
-                log.info("payment_intent.succeeded");
+                log.debug("LOG DEBUG: payment_intent.succeeded");
                 paymentIntentSucceeded.increment();
             }
             case "payment_intent.payment_failed" -> {
-                log.info("payment_intent.payment_failed");
+                log.debug("LOG DEBUG: payment_intent.payment_failed");
                 paymentIntentPaymentFailed.increment();
             }
         }
