@@ -2,26 +2,21 @@ package com.security.security.service;
 
 import io.micrometer.core.instrument.Counter;
 import io.micrometer.core.instrument.MeterRegistry;
-import jakarta.annotation.PostConstruct;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
-@RequiredArgsConstructor
 public class PaymentService {
 
-    private final MeterRegistry meterRegistry;
-    private Counter paymentIntentSucceeded;
-    private Counter paymentIntentPaymentFailed;
+    private final Counter paymentIntentSucceeded;
+    private final Counter paymentIntentPaymentFailed;
 
-    @PostConstruct
-    public void init() {
-        paymentIntentSucceeded = Counter.builder("payment_intent_succeeded")
+    public PaymentService(MeterRegistry meterRegistry) {
+        this.paymentIntentSucceeded = Counter.builder("payment_intent_succeeded")
                 .register(meterRegistry);
-        paymentIntentPaymentFailed = Counter.builder("payment_intent_payment_failed")
+        this.paymentIntentPaymentFailed = Counter.builder("payment_intent_payment_failed")
                 .register(meterRegistry);
     }
 
